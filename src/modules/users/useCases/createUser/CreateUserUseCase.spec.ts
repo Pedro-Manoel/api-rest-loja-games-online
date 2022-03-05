@@ -1,4 +1,3 @@
-import { User } from "@modules/users/entities/User";
 import { FakeUsersRepository } from "@modules/users/repositories/fakes/FakeUsersRepository";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { BcryptHashProvider } from "@shared/container/providers/hashProvider/implementations/BcryptHashProvider";
@@ -19,12 +18,12 @@ describe("Create user use case", () => {
   });
 
   it("should be able to create a new user", async () => {
-    const userData = User.create({
+    const userData = {
       name: "Test name",
       email: "test@test.com.br",
       password: "1234",
       admin: false,
-    });
+    };
 
     const user = await createUserUseCase.execute(userData);
 
@@ -35,12 +34,12 @@ describe("Create user use case", () => {
   });
 
   it("should be able to create a new user with encrypted password", async () => {
-    const userData = User.create({
+    const userData = {
       name: "Test name",
       email: "test@test.com.br",
       password: "1234",
       admin: false,
-    });
+    };
 
     const user = await createUserUseCase.execute(userData);
 
@@ -55,19 +54,19 @@ describe("Create user use case", () => {
   });
 
   it("should not be able to create a new user with email already registered", async () => {
-    const userData1 = User.create({
+    const userData1 = {
       name: "Test name",
       email: "test@test.com.br",
       password: "1234",
       admin: false,
-    });
+    };
 
-    const userData2 = User.create({
+    const userData2 = {
       name: "Test name 2",
       email: userData1.email,
       password: "1288",
       admin: false,
-    });
+    };
 
     await createUserUseCase.execute(userData1);
 

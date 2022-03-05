@@ -12,7 +12,7 @@ class AppError {
   }
 
   static notFound(message: string): AppError {
-    return new AppError(message, 401);
+    return new AppError(message, 404);
   }
 }
 

@@ -18,3 +18,24 @@ model User {
 
   @@map("users") 
 }
+
+model Game {
+  id            String    @id @default(uuid())
+  title         String    @unique
+  release_date  DateTime
+  value         Float
+  description   String
+  image_name    String?
+  genres Genre[]
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  @@map("games")
+}
+
+model Genre {
+  name String  @id @unique
+  games Game[]
+
+  @@map("genres")
+}

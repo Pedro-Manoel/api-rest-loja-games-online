@@ -27,13 +27,14 @@ class User {
     return user;
   }
 
-  static transform(user: User) {
+  static transform({ id, name, email, admin, created_at, updated_at }: User) {
     return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      createdAt: user.created_at,
-      updatedAt: user.updated_at,
+      id,
+      name,
+      email,
+      admin,
+      createdAt: created_at,
+      updatedAt: updated_at,
     };
   }
 }

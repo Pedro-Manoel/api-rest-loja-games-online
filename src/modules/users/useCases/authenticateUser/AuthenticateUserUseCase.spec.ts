@@ -1,4 +1,3 @@
-import { User } from "@modules/users/entities/User";
 import { FakeUsersRepository } from "@modules/users/repositories/fakes/FakeUsersRepository";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { BcryptHashProvider } from "@shared/container/providers/hashProvider/implementations/BcryptHashProvider";
@@ -32,12 +31,12 @@ describe("Authenticate user use case", () => {
 
     const passwordHash = await hashProvider.generate(password);
 
-    const userData = User.create({
+    const userData = {
       name: "Test name",
       email,
       password: passwordHash,
       admin: false,
-    });
+    };
 
     await usersRepository.create(userData);
 
@@ -54,12 +53,12 @@ describe("Authenticate user use case", () => {
 
     const passwordHash = await hashProvider.generate(password);
 
-    const userData = User.create({
+    const userData = {
       name: "Test name",
       email: "test@test.com.br",
       password: passwordHash,
       admin: false,
-    });
+    };
 
     await usersRepository.create(userData);
 
@@ -76,12 +75,12 @@ describe("Authenticate user use case", () => {
 
     const passwordHash = await hashProvider.generate("1234");
 
-    const userData = User.create({
+    const userData = {
       name: "Test name",
       email: "test@test.com.br",
       password: passwordHash,
       admin: false,
-    });
+    };
 
     await usersRepository.create(userData);
 

@@ -1,6 +1,5 @@
 import crypto from "crypto";
 
-import { User } from "@modules/users/entities/User";
 import { FakeUsersRepository } from "@modules/users/repositories/fakes/FakeUsersRepository";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { BcryptHashProvider } from "@shared/container/providers/hashProvider/implementations/BcryptHashProvider";
@@ -21,21 +20,21 @@ describe("Update user use case", () => {
   });
 
   it("should be able to update user", async () => {
-    const userCreateData = User.create({
+    const userCreateData = {
       name: "Test name",
       email: "test@test.com.br",
       password: "1234",
       admin: false,
-    });
+    };
 
     const userCreated = await usersRepository.create(userCreateData);
 
-    const userUpdateData = User.create({
+    const userUpdateData = {
       name: "New test name",
       email: "newtest@test.com.br",
       password: "1000",
       admin: true,
-    });
+    };
 
     const userUpdated = await updateUserUseCase.execute(
       userCreated.id,
@@ -55,21 +54,21 @@ describe("Update user use case", () => {
   });
 
   it("should not be able to update unregistered user", async () => {
-    const userCreateData = User.create({
+    const userCreateData = {
       name: "Test name",
       email: "test@test.com.br",
       password: "1234",
       admin: false,
-    });
+    };
 
     await usersRepository.create(userCreateData);
 
-    const userUpdateData = User.create({
+    const userUpdateData = {
       name: "New test name",
       email: "newtest@test.com.br",
       password: "1000",
       admin: true,
-    });
+    };
 
     await expect(
       updateUserUseCase.execute(crypto.randomUUID(), userUpdateData)
@@ -77,30 +76,30 @@ describe("Update user use case", () => {
   });
 
   it("should not be able to update user with email already registered", async () => {
-    const userCreateData1 = User.create({
+    const userCreateData1 = {
       name: "Test name 1",
       email: "test1@test.com.br",
       password: "1234",
       admin: false,
-    });
+    };
 
     const userCreated1 = await usersRepository.create(userCreateData1);
 
-    const userCreateData2 = User.create({
+    const userCreateData2 = {
       name: "Test name 2",
       email: "test2@test.com.br",
       password: "1244",
       admin: false,
-    });
+    };
 
     await usersRepository.create(userCreateData2);
 
-    const userUpdateData = User.create({
+    const userUpdateData = {
       name: "New test name",
       email: userCreateData2.email,
       password: "1000",
       admin: true,
-    });
+    };
 
     await expect(
       updateUserUseCase.execute(userCreated1.id, userUpdateData)

@@ -2,8 +2,11 @@
  * @jest-environment ./prisma/prisma-environment-jest
  */
 
+import crypto from "crypto";
 import request from "supertest";
 
+import { JsonWebTokenProvider } from "@shared/container/providers/tokenProvider/implementations/JsonWebTokenProvider";
+import { ITokenProvider } from "@shared/container/providers/tokenProvider/models/ITokenProvider";
 import { app } from "@shared/infra/http/app";
 
 const URL = "/users";
@@ -45,6 +48,33 @@ describe("User update controller", () => {
 
     expect(response.statusCode).toEqual(200);
     expect(response.body).toHaveProperty("id");
+  });
+
+  it("should not be able to update unregistered user", async () => {
+    // REVISAR ESSE CÓDIGO, É NECESSÁRIO OU NÃO
+
+    const tokenProvider: ITokenProvider = new JsonWebTokenProvider();
+
+    const testToken = tokenProvider.generate({
+      subject: crypto.randomUUID(),
+      expiresIn: "3d",
+    });
+
+    const response = await request(app)
+      .put(URL)
+      .send({
+        name: "New test name",
+        email: "newtest@test.com.br",
+        password: "1000",
+        admin: true,
+      })
+      .set({
+        Authorization: `Bearer ${testToken}`,
+      });
+
+    // console.log(response.body);
+
+    expect(response.statusCode).toEqual(404);
   });
 
   it("should not be able to update user with email already registered", async () => {

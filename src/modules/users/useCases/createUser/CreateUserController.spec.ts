@@ -9,7 +9,7 @@ import { app } from "@shared/infra/http/app";
 const URL = "/users";
 
 describe("Create user controller", () => {
-  it("shuold be able to create a new user", async () => {
+  it("should be able to create a new user", async () => {
     const response = await request(app).post(URL).send({
       name: "Test name",
       email: "test@gmail.com",

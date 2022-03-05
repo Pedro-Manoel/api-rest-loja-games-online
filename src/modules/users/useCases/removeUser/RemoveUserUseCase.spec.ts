@@ -1,4 +1,5 @@
-import { User } from "@modules/users/entities/User";
+import crypto from "crypto";
+
 import { FakeUsersRepository } from "@modules/users/repositories/fakes/FakeUsersRepository";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { AppError } from "@shared/errors/AppError";
@@ -15,12 +16,12 @@ describe("Remove user use case", () => {
   });
 
   it("should be able to remove user", async () => {
-    const userData = User.create({
+    const userData = {
       name: "Test name",
       email: "test@test.com.br",
       password: "1234",
       admin: false,
-    });
+    };
 
     const user = await usersRepository.create(userData);
 
@@ -32,12 +33,13 @@ describe("Remove user use case", () => {
   });
 
   it("should not be able to remove unregistered user", async () => {
-    const userData = User.create({
+    const userData = {
+      id: crypto.randomUUID(),
       name: "Test name",
       email: "test@test.com.br",
       password: "1234",
       admin: false,
-    });
+    };
 
     await expect(removeUserUseCase.execute(userData.id)).rejects.toEqual(
       AppError.notFound("User does not exists")
