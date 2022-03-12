@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import { CreatePurchaseController } from "@modules/purchase/useCases/createPurchase/CreatePurchaseController";
 import { AuthenticateUserController } from "@modules/users/useCases/authenticateUser/AuthenticateUserController";
 import { CreateUserController } from "@modules/users/useCases/createUser/CreateUserController";
 import { RemoveUserController } from "@modules/users/useCases/removeUser/RemoveUserController";
@@ -13,10 +14,16 @@ const createUserController = new CreateUserController();
 const updateUserController = new UpdateUserController();
 const authenticateUserController = new AuthenticateUserController();
 const removeUserController = new RemoveUserController();
+const createPurchaseController = new CreatePurchaseController();
 
 usersRoutes.post("/", createUserController.handle);
 usersRoutes.put("/", ensureAuthenticate, updateUserController.handle);
 usersRoutes.delete("/", ensureAuthenticate, removeUserController.handle);
 usersRoutes.post("/sessions", authenticateUserController.handle);
+usersRoutes.post(
+  "/purchases",
+  ensureAuthenticate,
+  createPurchaseController.handle
+);
 
 export { usersRoutes };

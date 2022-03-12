@@ -11,7 +11,7 @@ const URL = "/users";
 let token: string;
 
 describe("User remove controller", () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     const email = "test@test.com.br";
     const password = "1234";
 
