@@ -10,7 +10,8 @@
     "paths": {
       "@docs/*": ["docs/*"],
       "@modules/*": ["modules/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@config/*": ["config/*"]
     },                                      
     "resolveJsonModule": true,                           
 

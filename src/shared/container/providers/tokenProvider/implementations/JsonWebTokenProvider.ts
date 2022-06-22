@@ -3,7 +3,7 @@ import { sign, verify } from "jsonwebtoken";
 import { ITokenProvider, IOptions } from "../models/ITokenProvider";
 
 class JsonWebTokenProvider implements ITokenProvider {
-  constructor(private key: string = process.env.TOKEN_KEY) {}
+  constructor(private readonly key: string = process.env.TOKEN_KEY) {}
 
   generate({ subject, expiresIn }: IOptions): string {
     const token = sign({}, this.key, {
@@ -13,6 +13,7 @@ class JsonWebTokenProvider implements ITokenProvider {
 
     return token;
   }
+
   verify(token: string): string {
     const { sub } = verify(token, this.key);
 

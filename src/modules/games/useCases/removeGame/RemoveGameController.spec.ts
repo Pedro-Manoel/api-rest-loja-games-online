@@ -48,7 +48,7 @@ describe("Game remove controller", () => {
   });
 
   it("should be able to remove game", async () => {
-    const gameCreationResponse = await request(app)
+    const gameCreatResponse = await request(app)
       .post(URL)
       .send({
         title: "Test game name",
@@ -62,7 +62,7 @@ describe("Game remove controller", () => {
       });
 
     const response = await request(app)
-      .delete(`${URL}/${gameCreationResponse.body.id}`)
+      .delete(`${URL}/${gameCreatResponse.body.id}`)
       .set({
         Authorization: `Bearer ${adminToken}`,
       });
@@ -71,7 +71,7 @@ describe("Game remove controller", () => {
   });
 
   it("should not be able to remove game if user is not admin", async () => {
-    const gameCreationResponse = await request(app)
+    const gameCreatResponse = await request(app)
       .post(URL)
       .send({
         title: "Test game name 2",
@@ -85,7 +85,7 @@ describe("Game remove controller", () => {
       });
 
     const response = await request(app)
-      .delete(`${URL}/${gameCreationResponse.body.id}`)
+      .delete(`${URL}/${gameCreatResponse.body.id}`)
       .set({
         Authorization: `Bearer ${token}`,
       });

@@ -8,46 +8,46 @@ datasource db {
 }
 
 model User {
-  id          String    @id @default(uuid())
-  name        String 
-  email       String    @unique
-  password    String
-  admin       Boolean   @default(false)
-  purchases    Purchase[]
-  created_at  DateTime  @default(now())
-  updated_at  DateTime  @updatedAt
+  id         String     @id @default(uuid())
+  name       String
+  email      String     @unique
+  password   String
+  admin      Boolean    @default(false)
+  purchases  Purchase[]
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
 
-  @@map("users") 
+  @@map("users")
 }
 
 model Game {
-  id            String    @id @default(uuid())
-  title         String    @unique
-  release_date  DateTime
-  value         Float
-  description   String
-  image_name    String?
-  genres Genre[]
+  id           String     @id @default(uuid())
+  title        String     @unique
+  release_date DateTime
+  value        Float
+  description  String
+  image_name   String?
+  genres       Genre[]
   purchases    Purchase[]
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
+  created_at   DateTime   @default(now())
+  updated_at   DateTime   @updatedAt
 
   @@map("games")
 }
 
 model Genre {
-  name String  @id @unique
+  name  String @id @unique
   games Game[]
 
   @@map("genres")
 }
 
 model Purchase {
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String 
-  game        Game      @relation(fields: [gameId], references: [id])
-  gameId      String 
-  created_at  DateTime  @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  game       Game     @relation(fields: [gameId], references: [id])
+  gameId     String
+  created_at DateTime @default(now())
 
   @@id([userId, gameId])
   @@map("purchases")

@@ -77,16 +77,6 @@ describe("Update game use case", () => {
   });
 
   it("should not be able to update unregistered game", async () => {
-    const gameCreateData = {
-      title: "Test game name",
-      release_date: new Date(),
-      value: 78.5,
-      description: "Test game description",
-      genres: [],
-    };
-
-    await gamesRepository.create(gameCreateData);
-
     const gameUpdateData = {
       title: "New test game name",
       release_date: new Date(),

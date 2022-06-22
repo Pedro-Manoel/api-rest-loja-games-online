@@ -5,6 +5,13 @@ import { Prisma, PrismaPromise } from "@prisma/client";
 import { prisma } from "@shared/infra/prisma";
 
 class PrismaGamesRepository implements IGamesRepository {
+  async save(game: Game): Promise<void> {
+    await prisma.game.update({
+      where: { id: game.id },
+      data: game,
+    });
+  }
+
   async create({
     title,
     release_date,

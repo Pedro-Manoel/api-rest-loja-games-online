@@ -50,7 +50,7 @@ describe("Purchases create controller", () => {
   });
 
   it("should be able to create a new purchase", async () => {
-    const createGameResponse = await request(app)
+    const gameCreateResponse = await request(app)
       .post("/games")
       .send({
         title: "Test game name",
@@ -66,7 +66,7 @@ describe("Purchases create controller", () => {
     const response = await request(app)
       .post(`${URL}/purchases`)
       .send({
-        gameId: createGameResponse.body.id,
+        gameId: gameCreateResponse.body.id,
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -83,7 +83,7 @@ describe("Purchases create controller", () => {
       expiresIn: "3d",
     });
 
-    const createGameResponse = await request(app)
+    const gameCreateResponse = await request(app)
       .post("/games")
       .send({
         title: "Test game name 2",
@@ -99,7 +99,7 @@ describe("Purchases create controller", () => {
     const response = await request(app)
       .post(`${URL}/purchases`)
       .send({
-        gameId: createGameResponse.body.id,
+        gameId: gameCreateResponse.body.id,
       })
       .set({
         Authorization: `Bearer ${testToken}`,
@@ -122,7 +122,7 @@ describe("Purchases create controller", () => {
   });
 
   it("should not be able to create a new purchase if purchase already exists", async () => {
-    const createGameResponse = await request(app)
+    const gameCreateResponse = await request(app)
       .post("/games")
       .send({
         title: "Test game name 3",
@@ -138,7 +138,7 @@ describe("Purchases create controller", () => {
     await request(app)
       .post(`${URL}/purchases`)
       .send({
-        gameId: createGameResponse.body.id,
+        gameId: gameCreateResponse.body.id,
       })
       .set({
         Authorization: `Bearer ${token}`,
@@ -147,7 +147,7 @@ describe("Purchases create controller", () => {
     const response = await request(app)
       .post(`${URL}/purchases`)
       .send({
-        gameId: createGameResponse.body.id,
+        gameId: gameCreateResponse.body.id,
       })
       .set({
         Authorization: `Bearer ${token}`,

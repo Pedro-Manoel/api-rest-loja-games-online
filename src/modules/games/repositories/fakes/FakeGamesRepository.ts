@@ -7,6 +7,12 @@ import { IGamesRepository } from "../IGamesRepository";
 class FakeGamesRepository implements IGamesRepository {
   constructor(private games: Game[] = []) {}
 
+  async save(game: Game): Promise<void> {
+    const gameIndex = this.games.findIndex((g) => g.id === game.id);
+
+    this.games[gameIndex] = game;
+  }
+
   async create({
     title,
     release_date,
