@@ -8,16 +8,13 @@
     "rootDir": "./",                                  
     "baseUrl": "./src",                                  
     "paths": {
-      "@docs/*": ["docs/*"],
       "@modules/*": ["modules/*"],
       "@shared/*": ["shared/*"],
       "@config/*": ["config/*"]
     },                                      
     "resolveJsonModule": true,                           
-
     "esModuleInterop": true,                             
-    "forceConsistentCasingInFileNames": true,
-                
+    "forceConsistentCasingInFileNames": true,          
     "skipLibCheck": true                                 
   }
 }

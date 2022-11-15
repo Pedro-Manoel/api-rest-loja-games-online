@@ -9,7 +9,7 @@ import { JsonWebTokenProvider } from "@shared/container/providers/tokenProvider/
 import { ITokenProvider } from "@shared/container/providers/tokenProvider/models/ITokenProvider";
 import { app } from "@shared/infra/http/app";
 
-const URL = "/users";
+const URL = "/purchases";
 
 let token: string;
 let adminToken: string;
