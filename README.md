@@ -88,7 +88,7 @@ Projeto de uma API REST simples de uma loja de games online desenvolvido com [No
 - Acesso e controle do banco de dados com [prisma](https://www.prisma.io/)
 - Testes de unidade com [jest](https://jestjs.io/pt-BR/)
 - Testes de integração com [supertest](https://www.npmjs.com/package/supertest)
-- Injeção de dependencia com [tsyringe](https://www.npmjs.com/package/tsyringe)
+- Injeção de dependência com [tsyringe](https://www.npmjs.com/package/tsyringe)
 - Upload de arquivos com [multer](https://www.npmjs.com/package/multer)
 - Autenticação de usuários com [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - Verificação de lint com [eslint](https://eslint.org/)
